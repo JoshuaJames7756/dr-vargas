@@ -1,0 +1,61 @@
+.contacto { max-width: 1080px; margin: 0 auto; padding: 0 24px 80px; }
+
+.contacto__header { padding: 64px 0 40px; max-width: 520px; }
+.contacto__header h1 { font-size: 2.2rem; margin-bottom: 12px; }
+.contacto__header p { color: var(--color-text-soft); }
+
+.contacto__grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 48px;
+}
+
+.contacto__info {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.contacto__item { display: flex; flex-direction: column; gap: 4px; }
+
+.contacto__label {
+  font-size: 0.78rem;
+  color: var(--color-primary);
+  margin-bottom: 2px;
+}
+
+.contacto__item p { color: var(--color-text); font-size: 0.95rem; }
+
+.contacto__item a {
+  color: var(--color-accent);
+  font-weight: 600;
+  width: fit-content;
+}
+
+.contacto__item a:hover { text-decoration: underline; }
+
+.contacto__redes { display: flex; gap: 16px; }
+.contacto__redes a { color: var(--color-text); font-weight: 500; }
+.contacto__redes a:hover { color: var(--color-accent); }
+
+.contacto__pendiente { font-style: italic; opacity: 0.65; font-size: 0.88rem; }
+
+.contacto__mapa {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 420px;
+}
+
+.contacto__mapa iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border: none;
+  filter: saturate(0.85);
+}
+
+@media (max-width: 780px) {
+  .contacto__grid { grid-template-columns: 1fr; }
+  .contacto__mapa { min-height: 300px; }
+  .contacto__mapa iframe { min-height: 300px; }
+}

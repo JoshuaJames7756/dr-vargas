@@ -1,0 +1,41 @@
+.whatsapp-flotante {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  padding: 14px 18px;
+  border-radius: 50px;
+  box-shadow: 0 8px 24px rgba(11, 124, 128, 0.35);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.whatsapp-flotante:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(11, 124, 128, 0.42);
+}
+
+.whatsapp-flotante__icono {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.whatsapp-flotante__texto {
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* En mobile, colapsa a solo ícono para no tapar contenido */
+@media (max-width: 640px) {
+  .whatsapp-flotante {
+    padding: 14px;
+    border-radius: 50%;
+  }
+  .whatsapp-flotante__texto { display: none; }
+}

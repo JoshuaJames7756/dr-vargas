@@ -1,0 +1,104 @@
+.contenido { max-width: 1080px; margin: 0 auto; padding: 0 24px 80px; }
+
+.contenido__header { padding: 64px 0 16px; }
+.contenido__header h1 { font-size: 2.1rem; margin-bottom: 10px; }
+.contenido__header p { color: var(--color-text-soft); }
+
+.contenido__pendiente {
+  font-style: italic;
+  opacity: 0.65;
+  font-size: 0.9rem;
+  margin-bottom: 32px;
+}
+
+.contenido__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.post-card {
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.post-card__miniatura {
+  aspect-ratio: 4/5;
+  background-color: var(--color-bg-alt);
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.post-card__red {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(11, 124, 128, 0.85);
+  color: var(--color-white);
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.post-card__titulo {
+  font-size: 0.88rem;
+  color: var(--color-text-soft);
+}
+
+/* ===== Modal ===== */
+.contenido__modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 43, 42, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 24px;
+}
+
+.contenido__modal {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 480px;
+  min-height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contenido__modal iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  border: none;
+}
+
+.contenido__modal-cerrar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--color-bg-alt);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  color: var(--color-text-soft);
+  z-index: 2;
+}
+
+.contenido__modal-vacio {
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--color-text-soft);
+}
+
+@media (max-width: 720px) {
+  .contenido__grid { grid-template-columns: repeat(2, 1fr); }
+}

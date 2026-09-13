@@ -1,0 +1,196 @@
+.inicio { overflow-x: hidden; }
+
+/* ===== HERO ===== */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: stretch;
+  min-height: 640px;
+}
+
+.hero__texto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 56px;
+  max-width: 560px;
+}
+
+.hero__especialidad {
+  color: var(--color-primary);
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.hero__nombre {
+  font-size: 3rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero__desc {
+  color: var(--color-text-soft);
+  font-size: 1.05rem;
+  margin-bottom: 32px;
+  max-width: 460px;
+}
+
+.hero__acciones {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.hero__whatsapp {
+  font-size: 0.9rem;
+  color: var(--color-primary-dark);
+  border-bottom: 1px solid var(--color-primary);
+  padding-bottom: 2px;
+}
+
+.hero__imagen {
+  position: relative;
+  background: var(--color-bg-alt);
+  overflow: hidden;
+}
+
+.hero__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__loto {
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-primary-light) 0%, transparent 70%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ===== CONFIANZA ===== */
+.confianza {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.confianza__item {
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-right: 1px solid var(--color-border);
+}
+
+.confianza__item:last-child { border-right: none; }
+
+.confianza__cifra {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--color-primary-dark);
+}
+
+.confianza__label {
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+}
+
+/* ===== ÁREAS — tratamiento visual distinto entre ambas, no cards gemelas ===== */
+.areas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.areas__gineco,
+.areas__onco {
+  padding: 64px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.areas__gineco {
+  background: var(--color-bg);
+  border-right: 1px solid var(--color-border);
+}
+
+.areas__onco {
+  background: var(--color-bg-oncologia);
+}
+
+.areas__eyebrow {
+  font-size: 0.8rem;
+  color: var(--color-primary);
+}
+
+.areas__gineco h2,
+.areas__onco h2 {
+  font-size: 1.8rem;
+}
+
+.areas__gineco p,
+.areas__onco p {
+  color: var(--color-text-soft);
+  max-width: 380px;
+}
+
+.areas__link {
+  color: var(--color-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 8px;
+  transition: opacity var(--transition-fast);
+}
+
+.areas__gineco:hover .areas__link,
+.areas__onco:hover .areas__link { opacity: 0.7; }
+
+/* ===== CTA FINAL ===== */
+.cta-final {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+.cta-final__texto {
+  padding: 64px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  max-width: 420px;
+}
+
+.cta-final__texto p { color: var(--color-text-soft); margin-bottom: 8px; }
+
+.cta-final__mapa iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  border: none;
+  filter: saturate(0.85);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero__imagen { height: 320px; order: -1; }
+  .hero__texto { padding: 48px 24px; }
+  .hero__nombre { font-size: 2.2rem; }
+
+  .confianza { grid-template-columns: 1fr; }
+  .confianza__item { border-right: none; border-bottom: 1px solid var(--color-border); }
+
+  .areas { grid-template-columns: 1fr; }
+  .areas__gineco { border-right: none; border-bottom: 1px solid var(--color-border); }
+  .areas__gineco, .areas__onco { padding: 48px 24px; }
+
+  .cta-final { grid-template-columns: 1fr; }
+  .cta-final__texto { padding: 48px 24px; max-width: none; }
+}

@@ -1,0 +1,35 @@
+:root {
+  /* Paleta — extraída por pixel-sampling directo de Logo_4k.jfif */
+  --color-primary-dark: #0B7C80;   /* silueta + interior del loto */
+  --color-primary: #37A693;        /* pétalo medio */
+  --color-primary-mid: #5BB5AB;    /* pétalo medio-claro */
+  --color-primary-light: #96D1CB;  /* pétalo exterior claro */
+
+  --color-accent: #0B7C80;         /* CTA "Agendar cita" */
+  --color-accent-hover: #0A6B6E;
+
+  --color-bg: #FFFFFF;
+  --color-bg-alt: #F4FAF9;
+  --color-bg-oncologia: #F0F7F6;   /* fondo sección Oncología/Mastología */
+
+  --color-text: #1A2B2A;
+  --color-text-soft: #4A5F5D;
+
+  --color-border: #D9EDEA;
+  --color-white: #FFFFFF;
+
+  /* Tipografía */
+  --font-serif: 'Playfair Display', Georgia, serif;   /* nombre del Dr. — coherente con el logo */
+  --font-sans: 'Inter', -apple-system, sans-serif;     /* especialidad, cuerpo, UI */
+
+  /* Espaciado */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-soft: 0 4px 24px rgba(11, 124, 128, 0.08);
+  --shadow-card: 0 2px 12px rgba(11, 124, 128, 0.10);
+
+  /* Transiciones — sutiles, nada juguetón */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+}
