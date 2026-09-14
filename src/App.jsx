@@ -10,7 +10,6 @@ import Contenido from './pages/Contenido.jsx';
 import Contacto from './pages/Contacto.jsx';
 import Admin from './pages/Admin.jsx';
 import BotonWhatsApp from './components/BotonWhatsApp.jsx';
-import './assets/css/whatsapp-flotante.css';
 
 export default function App() {
   const { pathname } = useLocation();

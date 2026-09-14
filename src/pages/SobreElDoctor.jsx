@@ -1,63 +1,95 @@
 import { Link } from 'react-router-dom';
+import { useReveal } from '../lib/useReveal.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
-import '../assets/css/sobre-el-doctor.css';
 
 export default function SobreElDoctor() {
+  const containerRef = useReveal();
+
   return (
-    <>
+    <div ref={containerRef}>
       <Navbar />
 
-      <main className="sobre">
-        <section className="sobre__hero">
-          <div className="sobre__hero-texto">
-            <p className="sobre__eyebrow">Sobre el doctor</p>
-            <h1>Dr. Rolando Vargas Calvetty</h1>
-            <p className="sobre__especialidad">Ginecólogo — Oncólogo — Mastólogo</p>
-            <p className="sobre__intro">
-              Formación y práctica clínica orientadas a acompañar a cada paciente con
-              rigor médico y atención personalizada, en ginecología general y en el
-              manejo de casos oncológicos y mastológicos.
+      <main>
+        <section className="px-6 py-20 md:px-10 md:py-28">
+          <div className="reveal mx-auto grid max-w-[1180px] grid-cols-1 gap-14 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+            <div>
+              <p className="mb-4 text-[13px] text-teal-light">Sobre el doctor</p>
+              <h1 className="font-serif text-[36px] font-normal leading-[1.12] tracking-tight md:text-[48px]">
+                Dr. Rolando Vargas Calvetty
+              </h1>
+              <p className="mt-3 text-base text-teal-light">
+                Ginecólogo — Oncólogo — Mastólogo
+              </p>
+              <p className="mt-6 max-w-[52ch] text-[16.5px] leading-[1.7] text-muted">
+                Formación y práctica clínica orientadas a acompañar a cada paciente
+                con rigor médico y atención personalizada, en ginecología general y
+                en el manejo de casos oncológicos y mastológicos.
+              </p>
+            </div>
+            <div className="reveal reveal-delay-1 aspect-[4/5] max-w-[340px] overflow-hidden rounded">
+              <img
+                src="/img/dr-vargas-consultorio.jpg"
+                alt="Dr. Rolando Vargas Calvetty en consultorio"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-line px-6 py-16 md:px-10">
+          <div className="reveal mx-auto max-w-[1180px]">
+            <h2 className="mb-6 font-serif text-2xl font-normal">
+              Formación y registro profesional
+            </h2>
+            <ul className="flex max-w-[640px] flex-col gap-3">
+              <li className="border-t border-line pt-4 text-[15px]">
+                <strong className="text-paper">R.B.S.P.B.</strong>
+                <span className="text-muted"> — Registro profesional, San Pablo, Brasil</span>
+              </li>
+              <li className="border-t border-line pt-4 text-[15px] italic text-muted">
+                Especializaciones y estudios de posgrado — pendiente de confirmar con
+                el Dr. Vargas
+              </li>
+              <li className="border-y border-line py-4 text-[15px] italic text-muted">
+                Colegiatura / registro médico en Bolivia — pendiente de confirmar
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section className="bg-bg-alt px-6 py-16 md:px-10">
+          <div className="reveal mx-auto max-w-[1180px]">
+            <h2 className="mb-5 font-serif text-2xl font-normal">
+              Enfoque de atención
+            </h2>
+            <p className="max-w-[62ch] text-[16px] leading-[1.75] text-muted">
+              La consulta combina dos áreas complementarias: la ginecología
+              general, para el cuidado de rutina y el acompañamiento del embarazo,
+              y la oncología y mastología, para el diagnóstico y tratamiento de
+              casos que requieren mayor especialización. En ambos casos, cada
+              paciente recibe una explicación clara de su diagnóstico y las
+              opciones de tratamiento disponibles.
             </p>
           </div>
-          <div className="sobre__hero-foto">
-            <img src="/img/dr-vargas-consultorio.jpg" alt="Dr. Rolando Vargas Calvetty en consultorio" />
+        </section>
+
+        <section className="px-6 py-16 text-center md:px-10">
+          <div className="reveal mx-auto max-w-[52ch]">
+            <h2 className="font-serif text-2xl font-normal">
+              ¿Quieres conversar con el Dr. Vargas?
+            </h2>
+            <Link
+              to="/agendar-cita"
+              className="mt-6 inline-block rounded bg-copper px-8 py-4 text-[15px] font-medium text-[#23140A] transition-colors hover:bg-copper-hover"
+            >
+              Agendar cita
+            </Link>
           </div>
-        </section>
-
-        <section className="sobre__bloque">
-          <h2>Formación y registro profesional</h2>
-          <ul className="sobre__lista">
-            <li>
-              <strong>R.B.S.P.B.</strong> — Registro profesional, San Pablo, Brasil
-            </li>
-            <li className="sobre__pendiente">
-              Especializaciones y estudios de posgrado — pendiente de confirmar con el Dr. Vargas
-            </li>
-            <li className="sobre__pendiente">
-              Colegiatura / registro médico en Bolivia — pendiente de confirmar
-            </li>
-          </ul>
-        </section>
-
-        <section className="sobre__bloque">
-          <h2>Enfoque de atención</h2>
-          <p className="sobre__texto">
-            La consulta combina dos áreas complementarias: la ginecología general, para
-            el cuidado de rutina y el acompañamiento del embarazo, y la oncología y
-            mastología, para el diagnóstico y tratamiento de casos que requieren mayor
-            especialización. En ambos casos, cada paciente recibe una explicación clara
-            de su diagnóstico y las opciones de tratamiento disponibles.
-          </p>
-        </section>
-
-        <section className="sobre__cta">
-          <h2>¿Quieres conversar con el Dr. Vargas?</h2>
-          <Link to="/agendar-cita" className="btn-cta">Agendar cita</Link>
         </section>
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }

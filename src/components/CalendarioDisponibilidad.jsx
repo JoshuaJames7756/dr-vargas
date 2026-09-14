@@ -33,20 +33,38 @@ export default function CalendarioDisponibilidad({ fechaSeleccionada, onSeleccio
   }
 
   return (
-    <div className="calendario">
-      <div className="calendario__header">
-        <button className="calendario__nav" onClick={() => cambiarMes(-1)} aria-label="Mes anterior">‹</button>
-        <span className="calendario__mes">{MESES[mesActual]} {anioActual}</span>
-        <button className="calendario__nav" onClick={() => cambiarMes(1)} aria-label="Mes siguiente">›</button>
+    <div>
+      <div className="mb-4 flex items-center justify-between">
+        <button
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-alt text-lg leading-none text-teal-light transition-colors hover:bg-teal/20"
+          onClick={() => cambiarMes(-1)}
+          aria-label="Mes anterior"
+        >
+          ‹
+        </button>
+        <span className="font-serif text-base text-paper">
+          {MESES[mesActual]} {anioActual}
+        </span>
+        <button
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-alt text-lg leading-none text-teal-light transition-colors hover:bg-teal/20"
+          onClick={() => cambiarMes(1)}
+          aria-label="Mes siguiente"
+        >
+          ›
+        </button>
       </div>
 
-      <div className="calendario__grid calendario__grid--dias">
-        {DIAS.map((d, i) => <span key={i} className="calendario__dia-label">{d}</span>)}
+      <div className="mb-1.5 grid grid-cols-7 gap-1.5">
+        {DIAS.map((d, i) => (
+          <span key={i} className="text-center text-xs text-muted">
+            {d}
+          </span>
+        ))}
       </div>
 
-      <div className="calendario__grid">
+      <div className="grid grid-cols-7 gap-1.5">
         {diasDelMes.map((d, i) => {
-          if (d === null) return <span key={i} className="calendario__celda calendario__celda--vacia" />;
+          if (d === null) return <span key={i} className="aspect-square" />;
           const iso = toISO(anioActual, mesActual, d);
           const esPasado = iso < hoyISO;
           const noDisponible = fechasNoDisponibles.includes(iso);
@@ -57,9 +75,12 @@ export default function CalendarioDisponibilidad({ fechaSeleccionada, onSeleccio
             <button
               key={i}
               className={
-                'calendario__celda' +
-                (seleccionado ? ' is-selected' : '') +
-                (deshabilitado ? ' is-disabled' : '')
+                'aspect-square rounded text-sm transition-colors ' +
+                (seleccionado
+                  ? 'bg-copper font-semibold text-[#23140A]'
+                  : deshabilitado
+                    ? 'cursor-not-allowed bg-bg-alt text-line'
+                    : 'bg-bg-alt text-paper hover:bg-teal/30')
               }
               disabled={deshabilitado}
               onClick={() => onSeleccionarFecha(iso)}
