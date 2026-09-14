@@ -72,10 +72,12 @@ export default function Contacto() {
             </div>
 
             <div>
-              <span className="text-[12.5px] text-teal-light">Horario de atención</span>
-              <p className="mt-1.5 text-[15px] italic text-muted">
-                Pendiente de confirmar días y bloques exactos
-              </p>
+              <div className="flex items-center gap-2">
+                <span className="text-[12.5px] text-teal-light">Horario de atención</span>
+                <span className="text-[11px] italic text-muted/60">(ejemplo)</span>
+              </div>
+              <p className="mt-1.5 text-[15px] text-paper">Lunes a Viernes: 9:00–13:00 y 15:00–19:00</p>
+              <p className="text-[15px] text-paper">Sábados: 9:00–12:00</p>
             </div>
           </div>
 

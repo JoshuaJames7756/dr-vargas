@@ -7,10 +7,29 @@ import PostCard from '../components/PostCard.jsx';
 // PENDIENTE: reemplazar por los 3-5 links reales de Instagram/Facebook
 // que el Dr. Vargas confirme. Estructura y modal ya listos para
 // recibir embeds nativos (iframe de Instagram/Facebook) en el campo `embedUrl`.
+// Los títulos/miniaturas de abajo son contenido de EJEMPLO para visualizar el diseño.
 const POSTS_PLACEHOLDER = [
-  { id: 1, red: 'Instagram', titulo: 'Contenido educativo — pendiente', miniatura: '', embedUrl: '' },
-  { id: 2, red: 'Facebook', titulo: 'Contenido educativo — pendiente', miniatura: '', embedUrl: '' },
-  { id: 3, red: 'Instagram', titulo: 'Contenido educativo — pendiente', miniatura: '', embedUrl: '' },
+  {
+    id: 1,
+    red: 'Instagram',
+    titulo: '5 señales de que debes hacerte un Papanicolau',
+    miniatura: '',
+    embedUrl: '',
+  },
+  {
+    id: 2,
+    red: 'Facebook',
+    titulo: 'Mitos y verdades sobre la menopausia',
+    miniatura: '',
+    embedUrl: '',
+  },
+  {
+    id: 3,
+    red: 'Instagram',
+    titulo: 'La importancia del autoexamen mamario',
+    miniatura: '',
+    embedUrl: '',
+  },
 ];
 
 export default function Contenido() {
@@ -32,7 +51,7 @@ export default function Contenido() {
 
         {!hayContenidoReal && (
           <p className="reveal mx-auto mt-4 max-w-[1180px] text-sm italic text-muted">
-            Esta sección se completará con los posts y reels que el Dr. Vargas elija destacar.
+            Títulos de ejemplo — se completará con los posts y reels reales que el Dr. Vargas elija destacar.
           </p>
         )}
 

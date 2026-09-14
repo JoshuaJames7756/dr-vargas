@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useReveal } from '../lib/useReveal.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
+import retratoPlaceholder from '../assets/illustrations/retrato-placeholder.svg';
 
 export default function Inicio() {
   const containerRef = useReveal();
@@ -47,8 +48,8 @@ export default function Inicio() {
 
             <div className="reveal reveal-delay-2 relative aspect-[3/4] overflow-hidden rounded">
               <img
-                src="/img/dr-vargas-retrato.jpg"
-                alt="Dr. Rolando Vargas Calvetty"
+                src={retratoPlaceholder}
+                alt="Ilustración referencial — retrato del Dr. Vargas pendiente"
                 className="h-full w-full object-cover"
               />
               <div className="pointer-events-none absolute -inset-2.5 -z-10 rounded border border-teal opacity-50" />
@@ -58,20 +59,26 @@ export default function Inicio() {
 
         {/* BLOQUE DE CONFIANZA */}
         <section className="border-y border-line px-6 py-14 md:px-10">
-          <div className="mx-auto grid max-w-[1180px] grid-cols-1 gap-8 sm:grid-cols-3">
+          <div className="mx-auto grid max-w-[1180px] grid-cols-2 gap-8 sm:grid-cols-4">
             <div className="reveal">
+              <span className="block font-serif text-[26px]">15+</span>
+              <span className="mt-1.5 block text-[12.5px] text-muted">
+                años de experiencia clínica <em className="not-italic text-muted/60">(ejemplo)</em>
+              </span>
+            </div>
+            <div className="reveal reveal-delay-1">
+              <span className="block font-serif text-[26px]">2,000+</span>
+              <span className="mt-1.5 block text-[12.5px] text-muted">
+                pacientes atendidas <em className="not-italic text-muted/60">(ejemplo)</em>
+              </span>
+            </div>
+            <div className="reveal reveal-delay-2">
               <span className="block font-serif text-[22px]">R.B.S.P.B.</span>
               <span className="mt-1.5 block text-[12.5px] text-muted">
                 Registro profesional — San Pablo, Brasil
               </span>
             </div>
-            <div className="reveal reveal-delay-1">
-              <span className="block font-serif text-[22px]">2</span>
-              <span className="mt-1.5 block text-[12.5px] text-muted">
-                Áreas de especialidad bajo un mismo consultorio
-              </span>
-            </div>
-            <div className="reveal reveal-delay-2">
+            <div className="reveal reveal-delay-3">
               <span className="block font-serif text-[22px]">Cochabamba</span>
               <span className="mt-1.5 block text-[12.5px] text-muted">
                 Consultorio en Parque Fidel Anze, zona central
@@ -120,6 +127,39 @@ export default function Inicio() {
               Ver servicios de oncología →
             </span>
           </Link>
+        </section>
+
+        {/* TESTIMONIOS — contenido de ejemplo, pendiente de recopilar testimonios reales */}
+        <section className="px-6 py-20 md:px-10">
+          <div className="mx-auto max-w-[1180px]">
+            <div className="reveal mb-4 flex items-center justify-between">
+              <p className="text-[13px] text-teal-light">Testimonios</p>
+              <span className="text-[11px] italic text-muted/60">contenido de ejemplo</span>
+            </div>
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+              <div className="reveal border-t border-line pt-6">
+                <p className="font-serif text-[17px] italic leading-relaxed text-paper">
+                  “Me explicó cada paso del tratamiento con mucha claridad. Me sentí
+                  acompañada en todo momento.”
+                </p>
+                <p className="mt-4 text-[13px] text-muted">— Paciente de control prenatal</p>
+              </div>
+              <div className="reveal reveal-delay-1 border-t border-line pt-6">
+                <p className="font-serif text-[17px] italic leading-relaxed text-paper">
+                  “Profesionalismo y calidez. Explica todo en términos que se
+                  entienden, sin apuro.”
+                </p>
+                <p className="mt-4 text-[13px] text-muted">— Paciente de consulta ginecológica</p>
+              </div>
+              <div className="reveal reveal-delay-2 border-t border-line pt-6">
+                <p className="font-serif text-[17px] italic leading-relaxed text-paper">
+                  “Agendar la cita fue muy fácil y la atención en el consultorio
+                  excelente.”
+                </p>
+                <p className="mt-4 text-[13px] text-muted">— Paciente de seguimiento oncológico</p>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* CTA FINAL + UBICACIÓN */}

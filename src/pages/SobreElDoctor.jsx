@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useReveal } from '../lib/useReveal.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
+import consultorioPlaceholder from '../assets/illustrations/consultorio-placeholder.svg';
 
 export default function SobreElDoctor() {
   const containerRef = useReveal();
@@ -29,8 +30,8 @@ export default function SobreElDoctor() {
             </div>
             <div className="reveal reveal-delay-1 aspect-[4/5] max-w-[340px] overflow-hidden rounded">
               <img
-                src="/img/dr-vargas-consultorio.jpg"
-                alt="Dr. Rolando Vargas Calvetty en consultorio"
+                src={consultorioPlaceholder}
+                alt="Ilustración referencial — foto de consultorio pendiente"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -39,20 +40,28 @@ export default function SobreElDoctor() {
 
         <section className="border-t border-line px-6 py-16 md:px-10">
           <div className="reveal mx-auto max-w-[1180px]">
-            <h2 className="mb-6 font-serif text-2xl font-normal">
-              Formación y registro profesional
-            </h2>
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="font-serif text-2xl font-normal">
+                Formación y registro profesional
+              </h2>
+              <span className="text-[11px] italic text-muted/60">datos de ejemplo</span>
+            </div>
             <ul className="flex max-w-[640px] flex-col gap-3">
               <li className="border-t border-line pt-4 text-[15px]">
                 <strong className="text-paper">R.B.S.P.B.</strong>
                 <span className="text-muted"> — Registro profesional, San Pablo, Brasil</span>
               </li>
-              <li className="border-t border-line pt-4 text-[15px] italic text-muted">
-                Especializaciones y estudios de posgrado — pendiente de confirmar con
-                el Dr. Vargas
+              <li className="border-t border-line pt-4 text-[15px]">
+                <strong className="text-paper">2009</strong>
+                <span className="text-muted"> — Título de Medicina, Universidad Mayor de San Simón</span>
               </li>
-              <li className="border-y border-line py-4 text-[15px] italic text-muted">
-                Colegiatura / registro médico en Bolivia — pendiente de confirmar
+              <li className="border-t border-line pt-4 text-[15px]">
+                <strong className="text-paper">2013</strong>
+                <span className="text-muted"> — Especialización en Ginecología y Obstetricia</span>
+              </li>
+              <li className="border-y border-line py-4 text-[15px]">
+                <strong className="text-paper">2016</strong>
+                <span className="text-muted"> — Subespecialización en Oncología y Mastología, San Pablo, Brasil</span>
               </li>
             </ul>
           </div>
