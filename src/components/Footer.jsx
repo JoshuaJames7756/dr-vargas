@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo-transparent.png';
 
 export default function Footer() {
   return (
     <footer className="border-t border-line px-6 py-14 md:px-10">
       <div className="mx-auto grid max-w-[1180px] grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col gap-1.5">
-          <span className="font-serif text-base font-medium">
-            Dr. Rolando Vargas Calvetty
-          </span>
+          <div className="mb-1 flex items-center gap-2.5">
+            <img src={logo} alt="Logo Dr. Rolando Vargas Calvetty" className="h-9 w-9 object-contain" />
+            <span className="font-serif text-base font-medium">
+              Dr. Rolando Vargas Calvetty
+            </span>
+          </div>
           <span className="text-sm text-muted">
             Ginecólogo — Oncólogo — Mastólogo
           </span>

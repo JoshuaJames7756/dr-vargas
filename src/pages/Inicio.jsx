@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useReveal } from '../lib/useReveal.js';
 import { useCountUp } from '../lib/useCountUp.js';
-import { SEO, JSON_LD_PHYSICIAN } from '../lib/seo.js';
+import { SEO } from '../lib/seo.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 import Carrusel from '../components/Carrusel.jsx';
@@ -42,7 +42,7 @@ export default function Inicio() {
 
   return (
     <div ref={containerRef} className="animate-page-in">
-      <Seo title={SEO.inicio.title} description={SEO.inicio.description} jsonLd={JSON_LD_PHYSICIAN} />
+      <Seo title={SEO.inicio.title} description={SEO.inicio.description} />
       <Navbar />
 
       <main>

@@ -20,15 +20,13 @@ function setOgMeta(property, content) {
   tag.setAttribute('content', content);
 }
 
-const JSON_LD_ID = 'seo-json-ld';
-
 /**
- * Actualiza <title>, meta description/OG, y opcionalmente inyecta
- * un bloque JSON-LD en <head> (solo úsalo en UNA página, normalmente Inicio,
- * para no duplicar el schema.org Physician en cada ruta).
- * Uso: <Seo title="..." description="..." jsonLd={objeto} />
+ * Actualiza <title> y meta description/OG en cada cambio de página.
+ * El JSON-LD schema.org Physician vive estático en index.html (no aquí),
+ * para que los crawlers lo lean sin depender de que React se monte.
+ * Uso: <Seo title="..." description="..." />
  */
-export default function Seo({ title, description, jsonLd }) {
+export default function Seo({ title, description }) {
   useEffect(() => {
     if (title) document.title = title;
     if (description) {
@@ -36,22 +34,7 @@ export default function Seo({ title, description, jsonLd }) {
       setOgMeta('og:title', title);
       setOgMeta('og:description', description);
     }
-
-    if (jsonLd) {
-      let script = document.getElementById(JSON_LD_ID);
-      if (!script) {
-        script = document.createElement('script');
-        script.id = JSON_LD_ID;
-        script.type = 'application/ld+json';
-        document.head.appendChild(script);
-      }
-      script.textContent = JSON.stringify(jsonLd);
-    }
-
-    // Limpieza: si esta página no trae jsonLd pero una anterior sí lo dejó,
-    // no lo removemos — el schema del negocio debe seguir presente en todo
-    // el sitio para SEO, no solo en la página donde se declaró.
-  }, [title, description, jsonLd]);
+  }, [title, description]);
 
   return null;
 }

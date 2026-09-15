@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../assets/logo-transparent.png';
 
 const LINKS = [
   { to: '/', label: 'Inicio' },
@@ -21,13 +22,16 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-md">
       <div className="flex h-[88px] items-center justify-between px-6 md:px-10">
-        <Link to="/" className="group flex flex-col leading-tight" onClick={() => setAbierto(false)}>
-          <span className="font-serif text-[17px] font-medium tracking-tight transition-colors group-hover:text-teal-light">
-            Dr. Rolando Vargas Calvetty
-          </span>
-          <span className="text-[11px] text-teal-light">
-            Ginecólogo — Oncólogo — Mastólogo
-          </span>
+        <Link to="/" className="group flex items-center gap-3" onClick={() => setAbierto(false)}>
+          <img src={logo} alt="Logo Dr. Rolando Vargas Calvetty" className="h-11 w-11 object-contain" />
+          <div className="flex flex-col leading-tight">
+            <span className="font-serif text-[17px] font-medium tracking-tight transition-colors group-hover:text-teal-light">
+              Dr. Rolando Vargas Calvetty
+            </span>
+            <span className="text-[11px] text-teal-light">
+              Ginecólogo — Oncólogo — Mastólogo
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden gap-8 text-[14.5px] text-muted lg:flex">

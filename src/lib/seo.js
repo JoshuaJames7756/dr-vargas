@@ -40,24 +40,6 @@ export const SEO = {
   },
 };
 
-// JSON-LD schema.org tipo Physician — datos reales confirmados solamente.
-// NO incluye openingHours todavía: el horario en el sitio sigue siendo
-// de ejemplo, y Google penaliza inconsistencia en datos estructurados
-// una vez indexados. Agregar openingHours cuando el Dr. Vargas confirme
-// el horario real.
-export const JSON_LD_PHYSICIAN = {
-  '@context': 'https://schema.org',
-  '@type': 'Physician',
-  name: 'Dr. Rolando Vargas Calvetty',
-  medicalSpecialty: ['Gynecology', 'Oncologic', 'Breast Medicine'],
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Parque Fidel Anze #200, Esq. Av. Pando, Edif. VyV NUR, Primer piso',
-    addressLocality: 'Cochabamba',
-    addressCountry: 'BO',
-  },
-  telephone: '+59170344225',
-  url: 'https://drvargascalvetty.com', // actualizar cuando se compre el dominio final
-  sameAs: ['https://www.facebook.com/ginecologocochabamba'],
-  identifier: 'R.B.S.P.B. — San Pablo, Brasil',
-};
+// Nota: el JSON-LD schema.org Physician vive como <script> estático
+// en index.html (no aquí), para que los crawlers lo lean sin depender
+// de que React se monte primero. Si necesitas editarlo, edita index.html.
