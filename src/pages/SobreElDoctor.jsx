@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom';
 import { useReveal } from '../lib/useReveal.js';
+import { SEO } from '../lib/seo.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
+import Seo from '../components/Seo.jsx';
 import consultorioPlaceholder from '../assets/illustrations/consultorio-placeholder.svg';
 
 export default function SobreElDoctor() {
   const containerRef = useReveal();
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="animate-page-in">
+      <Seo title={SEO.sobreElDoctor.title} description={SEO.sobreElDoctor.description} />
       <Navbar />
 
       <main>

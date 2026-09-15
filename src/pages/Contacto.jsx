@@ -1,12 +1,15 @@
 import { useReveal } from '../lib/useReveal.js';
+import { SEO } from '../lib/seo.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
+import Seo from '../components/Seo.jsx';
 
 export default function Contacto() {
   const containerRef = useReveal();
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="animate-page-in">
+      <Seo title={SEO.contacto.title} description={SEO.contacto.description} />
       <Navbar />
 
       <main className="px-6 py-16 md:px-10">

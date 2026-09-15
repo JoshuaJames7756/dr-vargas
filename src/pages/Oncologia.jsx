@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useReveal } from '../lib/useReveal.js';
+import { SEO } from '../lib/seo.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 import ServicioAcordeon from '../components/ServicioAcordeon.jsx';
+import Seo from '../components/Seo.jsx';
 
 const SERVICIOS = [
   {
@@ -38,7 +40,8 @@ export default function Oncologia() {
   const containerRef = useReveal();
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="animate-page-in">
+      <Seo title={SEO.oncologia.title} description={SEO.oncologia.description} />
       <Navbar />
 
       <main>
@@ -61,14 +64,19 @@ export default function Oncologia() {
 
         {/* Lista con más espacio entre ítems que Ginecología */}
         <section className="bg-bg-alt px-6 py-20 md:px-10">
-          <div className="reveal mx-auto max-w-[760px]">
+          <div className="mx-auto max-w-[760px]">
             {SERVICIOS.map((s, i) => (
-              <ServicioAcordeon
+              <div
                 key={s.nombre}
-                servicio={s}
-                abierto={abiertoIdx === i}
-                onToggle={() => setAbiertoIdx(abiertoIdx === i ? -1 : i)}
-              />
+                className="reveal"
+                style={{ transitionDelay: `${i * 0.1}s` }}
+              >
+                <ServicioAcordeon
+                  servicio={s}
+                  abierto={abiertoIdx === i}
+                  onToggle={() => setAbiertoIdx(abiertoIdx === i ? -1 : i)}
+                />
+              </div>
             ))}
           </div>
         </section>

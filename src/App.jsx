@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { ClerkProvider } from '@clerk/clerk-react';
 import { clerkPublishableKey } from './lib/clerk.js';
+import ScrollToTop from './components/ScrollToTop.jsx';
 import Inicio from './pages/Inicio.jsx';
 import SobreElDoctor from './pages/SobreElDoctor.jsx';
 import Ginecologia from './pages/Ginecologia.jsx';
@@ -18,6 +19,7 @@ export default function App() {
 
   return (
     <ClerkProvider publishableKey={clerkPublishableKey}>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Inicio />} />
         <Route path="/sobre-el-doctor" element={<SobreElDoctor />} />

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useReveal } from '../lib/useReveal.js';
+import { SEO } from '../lib/seo.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 import PostCard from '../components/PostCard.jsx';
+import Seo from '../components/Seo.jsx';
 
 // PENDIENTE: reemplazar por los 3-5 links reales de Instagram/Facebook
 // que el Dr. Vargas confirme. Estructura y modal ya listos para
@@ -38,7 +40,8 @@ export default function Contenido() {
   const hayContenidoReal = POSTS_PLACEHOLDER.some((p) => p.embedUrl);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="animate-page-in">
+      <Seo title={SEO.contenido.title} description={SEO.contenido.description} />
       <Navbar />
 
       <main className="px-6 py-16 md:px-10">
@@ -65,15 +68,15 @@ export default function Contenido() {
 
         {postAbierto && (
           <div
-            className="fixed inset-0 z-[70] flex items-center justify-center bg-bg/90 p-6 backdrop-blur-sm"
+            className="fixed inset-0 z-[70] flex animate-fade-in items-center justify-center bg-bg/90 p-6 backdrop-blur-sm"
             onClick={() => setPostAbierto(null)}
           >
             <div
-              className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded bg-bg-alt"
+              className="relative aspect-[4/5] w-full max-w-md animate-[page-in_0.35s_cubic-bezier(0.16,1,0.3,1)_both] overflow-hidden rounded bg-bg-alt"
               onClick={(e) => e.stopPropagation()}
             >
               <button
-                className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-bg/80 text-lg text-paper hover:bg-bg"
+                className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-bg/80 text-lg text-paper transition-transform hover:rotate-90 hover:bg-bg"
                 onClick={() => setPostAbierto(null)}
                 aria-label="Cerrar"
               >

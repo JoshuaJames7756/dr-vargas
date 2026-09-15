@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useReveal } from '../lib/useReveal.js';
+import { SEO } from '../lib/seo.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 import ServicioAcordeon from '../components/ServicioAcordeon.jsx';
+import Seo from '../components/Seo.jsx';
 
 const SERVICIOS = [
   {
@@ -68,7 +70,8 @@ export default function Ginecologia() {
   const containerRef = useReveal();
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="animate-page-in">
+      <Seo title={SEO.ginecologia.title} description={SEO.ginecologia.description} />
       <Navbar />
 
       <main>
@@ -86,14 +89,19 @@ export default function Ginecologia() {
         </header>
 
         <section className="px-6 py-16 md:px-10">
-          <div className="reveal mx-auto max-w-[820px]">
+          <div className="mx-auto max-w-[820px]">
             {SERVICIOS.map((s, i) => (
-              <ServicioAcordeon
+              <div
                 key={s.nombre}
-                servicio={s}
-                abierto={abiertoIdx === i}
-                onToggle={() => setAbiertoIdx(abiertoIdx === i ? -1 : i)}
-              />
+                className="reveal"
+                style={{ transitionDelay: `${Math.min(i * 0.06, 0.4)}s` }}
+              >
+                <ServicioAcordeon
+                  servicio={s}
+                  abierto={abiertoIdx === i}
+                  onToggle={() => setAbiertoIdx(abiertoIdx === i ? -1 : i)}
+                />
+              </div>
             ))}
           </div>
         </section>

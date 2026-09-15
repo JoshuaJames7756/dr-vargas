@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import StepIndicator from '../components/StepIndicator.jsx';
 import CalendarioDisponibilidad from '../components/CalendarioDisponibilidad.jsx';
+import Seo from '../components/Seo.jsx';
+import { SEO } from '../lib/seo.js';
 import { useDisponibilidad } from '../hooks/useDisponibilidad.js';
 
 const TIPOS_CONSULTA = [
@@ -67,7 +69,8 @@ export default function AgendarCita() {
   }
 
   return (
-    <main className="mx-auto max-w-[900px] px-6 pb-20 pt-12 md:px-0">
+    <main className="mx-auto max-w-[900px] animate-page-in px-6 pb-20 pt-12 md:px-0">
+      <Seo title={SEO.agendarCita.title} description={SEO.agendarCita.description} />
       <header className="mb-10 text-left">
         <h1 className="font-serif text-[34px] font-normal">Agendar cita</h1>
         <p className="mt-2 max-w-[480px] text-[15px] text-muted">
@@ -79,7 +82,7 @@ export default function AgendarCita() {
 
       {/* PASO 1 — FECHA Y HORA */}
       {paso === 1 && !citaConfirmada && (
-        <section>
+        <section className="animate-slide-in-right">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
             <div>
               <h2 className="mb-4 font-serif text-xl font-normal">Elige el día</h2>
@@ -142,7 +145,7 @@ export default function AgendarCita() {
 
       {/* PASO 2 — DATOS DEL PACIENTE */}
       {paso === 2 && !citaConfirmada && (
-        <section>
+        <section className="animate-slide-in-right">
           <h2 className="mb-4 font-serif text-xl font-normal">Tus datos</h2>
           <form
             className="flex max-w-[480px] flex-col gap-5"
@@ -250,7 +253,7 @@ export default function AgendarCita() {
 
       {/* PASO 3 — CONFIRMACIÓN */}
       {paso === 3 && !citaConfirmada && (
-        <section>
+        <section className="animate-slide-in-right">
           <h2 className="mb-4 font-serif text-xl font-normal">Confirma tu cita</h2>
           <div className="flex max-w-[480px] flex-col gap-3.5 rounded bg-bg-alt p-6">
             <div className="flex justify-between border-b border-line pb-3.5 text-[15px]">
@@ -300,8 +303,8 @@ export default function AgendarCita() {
 
       {/* CONFIRMACIÓN FINAL */}
       {citaConfirmada && (
-        <section className="py-10 text-center">
-          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-copper text-2xl text-[#23140A]">
+        <section className="animate-fade-in py-10 text-center">
+          <div className="mx-auto mb-5 flex h-16 w-16 animate-[page-in_0.6s_cubic-bezier(0.34,1.56,0.64,1)_both] items-center justify-center rounded-full bg-copper text-2xl text-[#23140A]">
             ✓
           </div>
           <h2 className="font-serif text-xl font-normal">Cita confirmada</h2>
