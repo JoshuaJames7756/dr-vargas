@@ -29,7 +29,7 @@ export default function Navbar() {
               Dr. Rolando Vargas Calvetty
             </span>
             <span className="text-[11px] text-teal-light">
-              Ginecólogo — Oncólogo — Mastólogo
+              Ginecólogo, oncólogo y mastólogo
             </span>
           </div>
         </Link>

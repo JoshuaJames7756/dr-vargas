@@ -110,7 +110,7 @@ function PanelAdmin() {
 
   return (
     <div className="mx-auto max-w-[1100px] animate-page-in px-6 pb-20 pt-10">
-      <Seo title="Panel administrativo — Dr. Rolando Vargas Calvetty" description="" />
+      <Seo title="Panel administrativo, Dr. Rolando Vargas Calvetty" description="" />
 
       {/* HEADER CON SALUDO */}
       <header className="mb-9 flex flex-wrap items-center justify-between gap-4">
@@ -216,7 +216,6 @@ export default function Admin() {
         <div className="relative flex min-h-screen flex-col items-center justify-center gap-4 overflow-hidden bg-bg-alt px-6 text-center">
           <div className="pointer-events-none absolute -right-40 -top-32 h-[560px] w-[560px] animate-drift rounded-full bg-[radial-gradient(circle,rgba(55,166,147,0.16)_0%,transparent_70%)]" />
           <div className="relative animate-fade-in">
-            <p className="mb-3 text-[13px] text-teal-light">Área administrativa</p>
             <h1 className="font-serif text-2xl font-normal">Panel de citas</h1>
             <p className="mb-6 mt-2 max-w-[36ch] text-muted">
               Inicia sesión para gestionar las citas del consultorio del Dr. Rolando Vargas Calvetty.

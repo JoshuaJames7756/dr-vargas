@@ -13,7 +13,7 @@ export default function Footer() {
             </span>
           </div>
           <span className="text-sm text-muted">
-            Ginecólogo — Oncólogo — Mastólogo
+            Ginecólogo, oncólogo y mastólogo
           </span>
           <span className="text-sm text-muted">R.B.S.P.B. San Pablo, Brasil</span>
         </div>
@@ -64,6 +64,17 @@ export default function Footer() {
             Facebook
           </a>
         </div>
+      </div>
+
+      <div className="mx-auto mt-10 max-w-[1180px] border-t border-line pt-6 text-center">
+        <a
+          href="https://xiontech-seven.vercel.app"
+          target="_blank"
+          rel="noreferrer"
+          className="text-[12.5px] text-muted transition-colors hover:text-teal-light"
+        >
+          Sitio desarrollado por <span className="font-medium">Xion Technology</span>
+        </a>
       </div>
     </footer>
   );

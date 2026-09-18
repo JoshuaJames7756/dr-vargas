@@ -1,19 +1,16 @@
-import { useReveal } from '../lib/useReveal.js';
 import { SEO } from '../lib/seo.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 import Seo from '../components/Seo.jsx';
 
 export default function Contacto() {
-  const containerRef = useReveal();
-
   return (
-    <div ref={containerRef} className="animate-page-in">
+    <div>
       <Seo title={SEO.contacto.title} description={SEO.contacto.description} />
       <Navbar />
 
       <main className="px-6 py-16 md:px-10">
-        <header className="reveal mx-auto max-w-[1180px]">
+        <header className="mx-auto max-w-[1180px]">
           <h1 className="font-serif text-[32px] font-normal">Contacto</h1>
           <p className="mt-2 max-w-[52ch] text-[15px] text-muted">
             Escríbenos o visítanos en el consultorio. También puedes agendar tu
@@ -21,7 +18,7 @@ export default function Contacto() {
           </p>
         </header>
 
-        <section className="reveal reveal-delay-1 mx-auto mt-12 grid max-w-[1180px] grid-cols-1 gap-14 md:grid-cols-[1fr_1.2fr]">
+        <section className="mx-auto mt-12 grid max-w-[1180px] grid-cols-1 gap-14 md:grid-cols-[1fr_1.2fr]">
           <div className="flex flex-col gap-7">
             <div>
               <span className="text-[12.5px] text-teal-light">Dirección</span>

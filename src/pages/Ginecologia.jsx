@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useReveal } from '../lib/useReveal.js';
 import { SEO } from '../lib/seo.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
@@ -14,7 +13,7 @@ const SERVICIOS = [
       'Seguimiento del embarazo desde el primer trimestre, con acompañamiento en el parto o la cesárea según cada caso.',
   },
   {
-    nombre: 'Control prenatal — embarazo de alto y bajo riesgo',
+    nombre: 'Control prenatal, embarazo de alto y bajo riesgo',
     descripcion:
       'Controles periódicos para monitorear el desarrollo del embarazo, con manejo especializado cuando existen factores de riesgo.',
   },
@@ -67,23 +66,22 @@ const SERVICIOS = [
 
 export default function Ginecologia() {
   const [abiertoIdx, setAbiertoIdx] = useState(0);
-  const containerRef = useReveal();
 
   return (
-    <div ref={containerRef} className="animate-page-in">
+    <div>
       <Seo title={SEO.ginecologia.title} description={SEO.ginecologia.description} />
       <Navbar />
 
       <main>
         <header className="border-b border-line px-6 py-20 md:px-10 md:py-28">
-          <div className="reveal mx-auto max-w-[1180px]">
-            <p className="mb-5 text-[13px] text-teal-light">Consulta habitual</p>
+          <div className="mx-auto max-w-[1180px]">
             <h1 className="max-w-[14ch] font-serif text-[36px] font-normal leading-[1.12] tracking-tight md:text-[50px]">
               Ginecología
             </h1>
             <p className="mt-6 max-w-[56ch] text-[17px] leading-[1.7] text-muted">
-              Atención integral en cada etapa: desde el control anual de rutina
-              hasta el acompañamiento durante el embarazo y la menopausia.
+              La consulta habitual: atención integral en cada etapa, desde el
+              control anual de rutina hasta el acompañamiento durante el embarazo
+              y la menopausia.
             </p>
           </div>
         </header>
@@ -91,23 +89,18 @@ export default function Ginecologia() {
         <section className="px-6 py-16 md:px-10">
           <div className="mx-auto max-w-[820px]">
             {SERVICIOS.map((s, i) => (
-              <div
+              <ServicioAcordeon
                 key={s.nombre}
-                className="reveal"
-                style={{ transitionDelay: `${Math.min(i * 0.06, 0.4)}s` }}
-              >
-                <ServicioAcordeon
-                  servicio={s}
-                  abierto={abiertoIdx === i}
-                  onToggle={() => setAbiertoIdx(abiertoIdx === i ? -1 : i)}
-                />
-              </div>
+                servicio={s}
+                abierto={abiertoIdx === i}
+                onToggle={() => setAbiertoIdx(abiertoIdx === i ? -1 : i)}
+              />
             ))}
           </div>
         </section>
 
         <section className="bg-bg-alt px-6 py-16 text-center md:px-10">
-          <div className="reveal mx-auto max-w-[52ch]">
+          <div className="mx-auto max-w-[52ch]">
             <h2 className="font-serif text-[26px] font-normal leading-snug">
               ¿No sabes con cuál servicio empezar?
             </h2>

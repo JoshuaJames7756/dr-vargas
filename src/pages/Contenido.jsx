@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useReveal } from '../lib/useReveal.js';
 import { SEO } from '../lib/seo.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
@@ -36,16 +35,15 @@ const POSTS_PLACEHOLDER = [
 
 export default function Contenido() {
   const [postAbierto, setPostAbierto] = useState(null);
-  const containerRef = useReveal();
   const hayContenidoReal = POSTS_PLACEHOLDER.some((p) => p.embedUrl);
 
   return (
-    <div ref={containerRef} className="animate-page-in">
+    <div>
       <Seo title={SEO.contenido.title} description={SEO.contenido.description} />
       <Navbar />
 
       <main className="px-6 py-16 md:px-10">
-        <header className="reveal mx-auto max-w-[1180px]">
+        <header className="mx-auto max-w-[1180px]">
           <h1 className="font-serif text-[32px] font-normal">Contenido</h1>
           <p className="mt-2 text-[15px] text-muted">
             Publicaciones educativas del Dr. Vargas en Instagram y Facebook.
@@ -53,16 +51,14 @@ export default function Contenido() {
         </header>
 
         {!hayContenidoReal && (
-          <p className="reveal mx-auto mt-4 max-w-[1180px] text-sm italic text-muted">
-            Títulos de ejemplo — se completará con los posts y reels reales que el Dr. Vargas elija destacar.
+          <p className="mx-auto mt-4 max-w-[1180px] text-sm italic text-muted">
+            Títulos de ejemplo, se completará con los posts y reels reales que el Dr. Vargas elija destacar.
           </p>
         )}
 
         <section className="mx-auto mt-10 grid max-w-[1180px] grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
-          {POSTS_PLACEHOLDER.map((post, i) => (
-            <div key={post.id} className={`reveal ${i === 1 ? 'reveal-delay-1' : i === 2 ? 'reveal-delay-2' : ''}`}>
-              <PostCard post={post} onAbrir={setPostAbierto} />
-            </div>
+          {POSTS_PLACEHOLDER.map((post) => (
+            <PostCard key={post.id} post={post} onAbrir={setPostAbierto} />
           ))}
         </section>
 

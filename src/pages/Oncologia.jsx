@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useReveal } from '../lib/useReveal.js';
 import { SEO } from '../lib/seo.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
@@ -37,24 +36,21 @@ const SERVICIOS = [
 
 export default function Oncologia() {
   const [abiertoIdx, setAbiertoIdx] = useState(0);
-  const containerRef = useReveal();
 
   return (
-    <div ref={containerRef} className="animate-page-in">
+    <div>
       <Seo title={SEO.oncologia.title} description={SEO.oncologia.description} />
       <Navbar />
 
       <main>
         {/* Hero con más aire vertical que Ginecología — tono calmado, sin urgencia */}
         <header className="border-b border-line px-6 py-24 md:px-10 md:py-32">
-          <div className="reveal mx-auto max-w-[1180px]">
-            <p className="mb-5 text-[13px] text-teal-light">
-              Atención especializada
-            </p>
+          <div className="mx-auto max-w-[1180px]">
             <h1 className="max-w-[18ch] font-serif text-[32px] font-normal leading-[1.22] tracking-tight md:text-[46px]">
               Oncología y Mastología
             </h1>
-            <p className="mt-7 max-w-[54ch] text-[17px] leading-[1.75] text-muted">
+            <p className="mt-4 text-[16px] text-teal-light">Atención especializada</p>
+            <p className="mt-6 max-w-[54ch] text-[17px] leading-[1.75] text-muted">
               Un diagnóstico oncológico trae muchas preguntas. Aquí encuentras
               información clara sobre cada tratamiento, y un espacio para
               resolver tus dudas con calma, a tu ritmo.
@@ -66,24 +62,19 @@ export default function Oncologia() {
         <section className="bg-bg-alt px-6 py-20 md:px-10">
           <div className="mx-auto max-w-[760px]">
             {SERVICIOS.map((s, i) => (
-              <div
+              <ServicioAcordeon
                 key={s.nombre}
-                className="reveal"
-                style={{ transitionDelay: `${i * 0.1}s` }}
-              >
-                <ServicioAcordeon
-                  servicio={s}
-                  abierto={abiertoIdx === i}
-                  onToggle={() => setAbiertoIdx(abiertoIdx === i ? -1 : i)}
-                />
-              </div>
+                servicio={s}
+                abierto={abiertoIdx === i}
+                onToggle={() => setAbiertoIdx(abiertoIdx === i ? -1 : i)}
+              />
             ))}
           </div>
         </section>
 
         {/* CTA contenido, no urgente */}
         <section className="px-6 py-20 md:px-10">
-          <div className="reveal mx-auto max-w-[720px] rounded border border-line bg-bg-alt p-12 text-center md:p-16">
+          <div className="mx-auto max-w-[720px] rounded border border-line bg-bg-alt p-12 text-center md:p-16">
             <h2 className="mx-auto max-w-[28ch] font-serif text-[24px] font-normal leading-snug md:text-[30px]">
               Habla directamente con el Dr. Vargas
             </h2>
