@@ -174,8 +174,8 @@ function PanelAdmin() {
       {/* KPIs */}
       <div className="mb-9 grid grid-cols-2 gap-3.5 sm:grid-cols-4">
         <KpiCard label="Total de citas" value={kpis.total} delay={0} />
-        <KpiCard label="Hoy" value={kpis.hoy} accent="text-copper" delay={0.05} />
-        <KpiCard label="Pendientes" value={kpis.pendientes} accent="text-copper" delay={0.1} />
+        <KpiCard label="Hoy" value={kpis.hoy} accent="text-copper-hover" delay={0.05} />
+        <KpiCard label="Pendientes" value={kpis.pendientes} accent="text-copper-hover" delay={0.1} />
         <KpiCard label="Confirmadas" value={kpis.confirmadas} accent="text-teal-light" delay={0.15} />
       </div>
 
