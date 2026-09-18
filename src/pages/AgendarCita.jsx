@@ -108,7 +108,7 @@ export default function AgendarCita() {
       {/* PASO 1: FECHA Y HORA */}
       {paso === 1 && !citaConfirmada && (
         <section className="animate-slide-in-right">
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
             <div>
               <h2 className="mb-4 font-serif text-xl font-normal">Elige el día</h2>
               <CalendarioDisponibilidad

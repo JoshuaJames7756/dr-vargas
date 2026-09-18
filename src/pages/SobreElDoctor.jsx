@@ -13,7 +13,7 @@ export default function SobreElDoctor() {
 
       <main>
         <section className="px-6 py-20 md:px-10 md:py-28">
-          <div className="mx-auto grid max-w-[1180px] grid-cols-1 gap-14 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+          <div className="mx-auto grid max-w-[1180px] grid-cols-1 gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <h1 className="font-serif text-[36px] font-normal leading-[1.12] tracking-tight md:text-[48px]">
                 Dr. Rolando Vargas Calvetty

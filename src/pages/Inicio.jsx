@@ -53,7 +53,7 @@ export default function Inicio() {
           <div className="pointer-events-none absolute -right-40 -top-32 h-[560px] w-[560px] animate-drift rounded-full bg-[radial-gradient(circle,rgba(55,166,147,0.16)_0%,transparent_70%)]" />
           <div className="pointer-events-none absolute -bottom-24 -left-24 h-[380px] w-[380px] animate-drift rounded-full bg-[radial-gradient(circle,rgba(201,123,74,0.09)_0%,transparent_70%)] [animation-delay:3s]" />
 
-          <div className="relative mx-auto grid max-w-[1180px] grid-cols-1 gap-14 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+          <div className="relative mx-auto grid max-w-[1180px] grid-cols-1 gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <h1 className="max-w-[15ch] animate-slide-in-left font-serif text-[38px] font-normal leading-[1.12] tracking-tight md:text-[54px]">
                 Dr. Rolando Vargas Calvetty
@@ -139,10 +139,10 @@ export default function Inicio() {
         <section className="grid grid-cols-1 gap-px border-x border-line bg-line md:grid-cols-2">
           <Link
             to="/ginecologia"
-            className="group relative overflow-hidden bg-bg p-11 transition-colors duration-300 hover:bg-[#142B25]"
+            className="group relative overflow-hidden bg-bg p-7 transition-colors duration-300 hover:bg-[#142B25] md:p-11"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-copper transition-all duration-500 ease-out group-hover:w-1" />
-            <h2 className="mb-3.5 font-serif text-[26px] font-medium transition-transform duration-300 group-hover:translate-x-1.5">
+            <h2 className="mb-3.5 font-serif text-[24px] font-medium transition-transform duration-300 group-hover:translate-x-1.5 md:text-[26px]">
               Ginecología
             </h2>
             <p className="max-w-[42ch] text-[15px] leading-relaxed text-muted">
@@ -156,10 +156,10 @@ export default function Inicio() {
 
           <Link
             to="/oncologia-mastologia"
-            className="group relative overflow-hidden bg-bg-alt p-11 transition-colors duration-300 hover:bg-[#142B25]"
+            className="group relative overflow-hidden bg-bg-alt p-7 transition-colors duration-300 hover:bg-[#142B25] md:p-11"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-teal transition-all duration-500 ease-out group-hover:w-1" />
-            <h2 className="mb-3.5 font-serif text-[26px] font-medium transition-transform duration-300 group-hover:translate-x-1.5">
+            <h2 className="mb-3.5 font-serif text-[24px] font-medium transition-transform duration-300 group-hover:translate-x-1.5 md:text-[26px]">
               Oncología y Mastología
             </h2>
             <p className="max-w-[42ch] text-[15px] leading-relaxed text-muted">
@@ -195,7 +195,7 @@ export default function Inicio() {
 
         {/* CTA FINAL + UBICACIÓN */}
         <section className="bg-teal px-6 py-20 md:px-10">
-          <div className="mx-auto grid max-w-[1180px] grid-cols-1 gap-10 md:grid-cols-[1fr_1.1fr] md:items-center">
+          <div className="mx-auto grid max-w-[1180px] grid-cols-1 gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
             <div className="text-bg">
               <h2 className="font-serif text-[28px] font-normal leading-tight md:text-[34px]">
                 Reserva tu consulta
