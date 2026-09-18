@@ -16,6 +16,28 @@ const TIPOS_CONSULTA = [
 const inputClass =
   'rounded border border-line bg-bg px-3.5 py-3 font-sans text-[15px] text-paper focus:outline focus:outline-2 focus:outline-teal';
 
+// '2026-09-17' -> 'miércoles 17 de septiembre de 2026'
+function formatearFecha(iso) {
+  if (!iso) return '';
+  const [y, m, d] = iso.split('-').map(Number);
+  const fecha = new Date(y, m - 1, d);
+  const texto = fecha.toLocaleDateString('es-BO', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+  return texto.replace(',', '');
+}
+
+// '14:30' -> '2:30 p. m.'
+function formatearHora(hora) {
+  if (!hora) return '';
+  const [h, min] = hora.split(':').map(Number);
+  const fecha = new Date(2000, 0, 1, h, min);
+  return fecha.toLocaleTimeString('es-BO', { hour: 'numeric', minute: '2-digit' });
+}
+
 export default function AgendarCita() {
   const [paso, setPaso] = useState(1);
   const [fecha, setFecha] = useState(null);
@@ -62,14 +84,14 @@ export default function AgendarCita() {
       }
       setCitaConfirmada(data.cita);
     } catch {
-      setErrorEnvio('Hubo un problema de conexión. Intenta de nuevo.');
+      setErrorEnvio('Hubo un problema de conexión. Verifica tu internet e intenta de nuevo.');
     } finally {
       setEnviando(false);
     }
   }
 
   return (
-    <main className="mx-auto max-w-[900px] animate-page-in px-6 pb-20 pt-12 md:px-0">
+    <main className="mx-auto max-w-[900px] px-6 pb-20 pt-12 md:px-0">
       <Seo title={SEO.agendarCita.title} description={SEO.agendarCita.description} />
       <header className="mb-10 text-left">
         <h1 className="font-serif text-[34px] font-normal">Agendar cita</h1>
@@ -80,7 +102,7 @@ export default function AgendarCita() {
 
       <StepIndicator pasoActual={citaConfirmada ? 4 : paso} />
 
-      {/* PASO 1 — FECHA Y HORA */}
+      {/* PASO 1: FECHA Y HORA */}
       {paso === 1 && !citaConfirmada && (
         <section className="animate-slide-in-right">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
@@ -103,7 +125,10 @@ export default function AgendarCita() {
                 <p className="py-3 text-sm text-muted">Buscando horarios disponibles…</p>
               )}
               {fecha && !cargando && errorDisponibilidad && (
-                <p className="py-3 text-sm text-red-400">{errorDisponibilidad}</p>
+                <div className="flex items-start gap-3 rounded border border-red-400/30 bg-red-400/5 px-4 py-3">
+                  <span className="mt-0.5 text-red-300">⚠</span>
+                  <p className="text-sm text-red-300">{errorDisponibilidad}</p>
+                </div>
               )}
               {fecha && !cargando && !errorDisponibilidad && horarios.length === 0 && (
                 <p className="py-3 text-sm text-muted">
@@ -123,7 +148,7 @@ export default function AgendarCita() {
                       }
                       onClick={() => setHora(h)}
                     >
-                      {h}
+                      {formatearHora(h)}
                     </button>
                   ))}
                 </div>
@@ -137,13 +162,13 @@ export default function AgendarCita() {
               disabled={!fecha || !hora}
               onClick={() => setPaso(2)}
             >
-              Continuar
+              Elegir mis datos
             </button>
           </div>
         </section>
       )}
 
-      {/* PASO 2 — DATOS DEL PACIENTE */}
+      {/* PASO 2: DATOS DEL PACIENTE */}
       {paso === 2 && !citaConfirmada && (
         <section className="animate-slide-in-right">
           <h2 className="mb-4 font-serif text-xl font-normal">Tus datos</h2>
@@ -237,32 +262,32 @@ export default function AgendarCita() {
                 className="rounded border border-line px-6 py-3.5 font-medium text-muted transition-colors hover:border-teal"
                 onClick={() => setPaso(1)}
               >
-                Atrás
+                Cambiar fecha
               </button>
               <button
                 type="submit"
                 className="rounded bg-copper px-8 py-3.5 font-medium text-[#23140A] transition-colors hover:bg-copper-hover disabled:cursor-not-allowed disabled:opacity-40"
                 disabled={!datosValidos()}
               >
-                Revisar cita
+                Revisar mi cita
               </button>
             </div>
           </form>
         </section>
       )}
 
-      {/* PASO 3 — CONFIRMACIÓN */}
+      {/* PASO 3: CONFIRMACIÓN */}
       {paso === 3 && !citaConfirmada && (
         <section className="animate-slide-in-right">
           <h2 className="mb-4 font-serif text-xl font-normal">Confirma tu cita</h2>
           <div className="flex max-w-[480px] flex-col gap-3.5 rounded bg-bg-alt p-6">
-            <div className="flex justify-between border-b border-line pb-3.5 text-[15px]">
+            <div className="flex justify-between gap-4 border-b border-line pb-3.5 text-[15px]">
               <span className="text-muted">Fecha</span>
-              <strong className="font-medium">{fecha}</strong>
+              <strong className="text-right font-medium capitalize">{formatearFecha(fecha)}</strong>
             </div>
             <div className="flex justify-between border-b border-line pb-3.5 text-[15px]">
               <span className="text-muted">Hora</span>
-              <strong className="font-medium">{hora}</strong>
+              <strong className="font-medium">{formatearHora(hora)}</strong>
             </div>
             <div className="flex justify-between border-b border-line pb-3.5 text-[15px]">
               <span className="text-muted">Paciente</span>
@@ -280,7 +305,15 @@ export default function AgendarCita() {
             </div>
           </div>
 
-          {errorEnvio && <p className="mt-4 text-sm text-red-400">{errorEnvio}</p>}
+          {errorEnvio && (
+            <div className="mt-4 flex items-start gap-3 rounded border border-red-400/30 bg-red-400/5 px-4 py-3.5">
+              <span className="mt-0.5 text-lg text-red-300">⚠</span>
+              <div>
+                <p className="text-sm font-medium text-red-300">No se pudo agendar la cita</p>
+                <p className="mt-0.5 text-sm text-red-300/80">{errorEnvio}</p>
+              </div>
+            </div>
+          )}
 
           <div className="mt-7 flex gap-3">
             <button
@@ -288,14 +321,14 @@ export default function AgendarCita() {
               className="rounded border border-line px-6 py-3.5 font-medium text-muted transition-colors hover:border-teal"
               onClick={() => setPaso(2)}
             >
-              Atrás
+              Editar datos
             </button>
             <button
               className="rounded bg-copper px-8 py-3.5 font-medium text-[#23140A] transition-colors hover:bg-copper-hover disabled:cursor-not-allowed disabled:opacity-40"
               onClick={confirmarCita}
               disabled={enviando}
             >
-              {enviando ? 'Confirmando…' : 'Confirmar cita'}
+              {enviando ? 'Confirmando…' : errorEnvio ? 'Intentar de nuevo' : 'Confirmar cita'}
             </button>
           </div>
         </section>
@@ -309,9 +342,10 @@ export default function AgendarCita() {
           </div>
           <h2 className="font-serif text-xl font-normal">Cita confirmada</h2>
           <p className="mx-auto mt-2 max-w-[460px] text-[15px] text-muted">
-            Te esperamos el <strong className="text-paper">{citaConfirmada.fecha}</strong> a las{' '}
-            <strong className="text-paper">{citaConfirmada.hora}</strong> en el consultorio del Dr.
-            Rolando Vargas Calvetty. Te enviaremos la confirmación por WhatsApp
+            Te esperamos el{' '}
+            <strong className="capitalize text-paper">{formatearFecha(citaConfirmada.fecha)}</strong>{' '}
+            a las <strong className="text-paper">{formatearHora(citaConfirmada.hora)}</strong> en el
+            consultorio del Dr. Rolando Vargas Calvetty. Te enviaremos la confirmación por WhatsApp
             {citaConfirmada.email ? ' y correo electrónico.' : '.'}
           </p>
           <p className="mx-auto mt-4 max-w-[460px] text-[13px] text-muted">
