@@ -16,10 +16,13 @@ const TIPOS_CONSULTA = [
 const inputClass =
   'rounded border border-line bg-bg px-3.5 py-3 font-sans text-[15px] text-paper focus:outline focus:outline-2 focus:outline-teal';
 
-// '2026-09-17' -> 'miércoles 17 de septiembre de 2026'
-function formatearFecha(iso) {
-  if (!iso) return '';
-  const [y, m, d] = iso.split('-').map(Number);
+// Acepta '2026-09-17' o '2026-09-17T00:00:00.000Z' (formato real que
+// puede devolver Neon para columnas DATE) -> 'miércoles 17 de septiembre de 2026'
+function formatearFecha(valor) {
+  if (!valor) return '';
+  const soloFecha = String(valor).slice(0, 10);
+  const [y, m, d] = soloFecha.split('-').map(Number);
+  if (!y || !m || !d) return String(valor);
   const fecha = new Date(y, m - 1, d);
   const texto = fecha.toLocaleDateString('es-BO', {
     weekday: 'long',

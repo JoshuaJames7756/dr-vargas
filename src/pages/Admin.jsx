@@ -28,10 +28,13 @@ function saludo() {
   return 'Buenas noches';
 }
 
-// '2026-09-17' -> '17 sep 2026'
-function formatearFecha(iso) {
-  if (!iso) return '';
-  const [y, m, d] = iso.split('-').map(Number);
+// Acepta '2026-09-18' o '2026-09-18T00:00:00.000Z' (formato real que
+// puede devolver Neon para columnas DATE) -> '18 sep 2026'
+function formatearFecha(valor) {
+  if (!valor) return '';
+  const soloFecha = String(valor).slice(0, 10); // toma 'YYYY-MM-DD' de cualquiera de los dos formatos
+  const [y, m, d] = soloFecha.split('-').map(Number);
+  if (!y || !m || !d) return String(valor); // si algo raro llega, mostrar el dato crudo en vez de "Invalid Date"
   const fecha = new Date(y, m - 1, d);
   return fecha.toLocaleDateString('es-BO', { day: 'numeric', month: 'short', year: 'numeric' });
 }
