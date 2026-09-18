@@ -19,6 +19,15 @@ export default function Navbar() {
     setAbierto(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (!abierto) return;
+    function handleEscape(e) {
+      if (e.key === 'Escape') setAbierto(false);
+    }
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [abierto]);
+
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-md">
       <div className="flex h-[88px] items-center justify-between px-6 md:px-10">
@@ -68,6 +77,7 @@ export default function Navbar() {
             onClick={() => setAbierto((v) => !v)}
             aria-label={abierto ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={abierto}
+            aria-controls="menu-mobile"
           >
             <span
               className={
@@ -87,6 +97,7 @@ export default function Navbar() {
 
       {/* Menú mobile desplegable */}
       <div
+        id="menu-mobile"
         className={
           'overflow-hidden transition-[max-height,opacity] duration-400 ease-out lg:hidden ' +
           (abierto ? 'max-h-[420px] opacity-100' : 'max-h-0 opacity-0')

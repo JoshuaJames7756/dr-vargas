@@ -5,11 +5,19 @@ export default function StepIndicator({ pasoActual }) {
     { n: 3, label: 'Confirmación' },
   ];
 
-  const pasoClamp = Math.min(Math.max(pasoActual, 1), pasos.length);
-  const progresoPct = ((pasoClamp - 1) / (pasos.length - 1)) * 100;
+  const pasoActivo = pasos.find((p) => p.n === pasoActual);
 
   return (
-    <div className="mb-14">
+    <div
+      className="mb-14"
+      role="progressbar"
+      aria-valuenow={pasoActual}
+      aria-valuemin={1}
+      aria-valuemax={pasos.length}
+      aria-valuetext={
+        pasoActivo ? `Paso ${pasoActual} de ${pasos.length}: ${pasoActivo.label}` : undefined
+      }
+    >
       <div className="flex items-start">
         {pasos.map((p, i) => {
           const activo = pasoActual === p.n;
@@ -20,6 +28,7 @@ export default function StepIndicator({ pasoActual }) {
             <div key={p.n} className={'flex items-center' + (esUltimo ? '' : ' flex-1')}>
               <div className="flex flex-col items-center">
                 <span
+                  aria-hidden="true"
                   className={
                     'flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border-2 bg-bg text-[13px] font-semibold transition-all duration-300 ' +
                     (activo
@@ -42,7 +51,11 @@ export default function StepIndicator({ pasoActual }) {
               </div>
 
               {!esUltimo && (
-                <div className="relative mx-3 h-px flex-1 self-start" style={{ top: '20px' }}>
+                <div
+                  aria-hidden="true"
+                  className="relative mx-3 h-px flex-1 self-start"
+                  style={{ top: '20px' }}
+                >
                   <div className="absolute inset-0 bg-line" />
                   <div
                     className="absolute inset-y-0 left-0 bg-copper transition-all duration-500 ease-out"
