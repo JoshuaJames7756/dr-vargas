@@ -36,7 +36,7 @@ export default function CalendarioDisponibilidad({ fechaSeleccionada, onSeleccio
     <div>
       <div className="mb-4 flex items-center justify-between">
         <button
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-alt text-lg leading-none text-teal-light transition-colors hover:bg-teal/20"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-alt text-lg leading-none text-teal-light transition-colors hover:bg-teal/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-light"
           onClick={() => cambiarMes(-1)}
           aria-label="Mes anterior"
         >
@@ -46,7 +46,7 @@ export default function CalendarioDisponibilidad({ fechaSeleccionada, onSeleccio
           {MESES[mesActual]} {anioActual}
         </span>
         <button
-          className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-alt text-lg leading-none text-teal-light transition-colors hover:bg-teal/20"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-bg-alt text-lg leading-none text-teal-light transition-colors hover:bg-teal/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-light"
           onClick={() => cambiarMes(1)}
           aria-label="Mes siguiente"
         >
@@ -75,7 +75,7 @@ export default function CalendarioDisponibilidad({ fechaSeleccionada, onSeleccio
             <button
               key={i}
               className={
-                'aspect-square rounded text-sm transition-colors ' +
+                'aspect-square rounded text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-light ' +
                 (seleccionado
                   ? 'bg-copper font-semibold text-[#23140A]'
                   : deshabilitado
@@ -84,6 +84,11 @@ export default function CalendarioDisponibilidad({ fechaSeleccionada, onSeleccio
               }
               disabled={deshabilitado}
               onClick={() => onSeleccionarFecha(iso)}
+              aria-label={
+                `${d} de ${MESES[mesActual]} de ${anioActual}` +
+                (seleccionado ? ', seleccionado' : deshabilitado ? ', no disponible' : '')
+              }
+              aria-pressed={seleccionado}
             >
               {d}
             </button>

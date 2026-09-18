@@ -28,6 +28,22 @@ function saludo() {
   return 'Buenas noches';
 }
 
+// '2026-09-17' -> '17 sep 2026'
+function formatearFecha(iso) {
+  if (!iso) return '';
+  const [y, m, d] = iso.split('-').map(Number);
+  const fecha = new Date(y, m - 1, d);
+  return fecha.toLocaleDateString('es-BO', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+// '14:30' -> '2:30 p. m.'
+function formatearHora(hora) {
+  if (!hora) return '';
+  const [h, min] = hora.split(':').map(Number);
+  const fecha = new Date(2000, 0, 1, h, min);
+  return fecha.toLocaleTimeString('es-BO', { hour: 'numeric', minute: '2-digit' });
+}
+
 function KpiCard({ label, value, accent, delay = 0 }) {
   return (
     <div
@@ -43,6 +59,17 @@ function KpiCard({ label, value, accent, delay = 0 }) {
 }
 
 function FilaCita({ cita, onActualizar, i }) {
+  // 'idle' | 'guardando' | 'guardado' | 'error'
+  const [estadoGuardado, setEstadoGuardado] = useState('idle');
+
+  async function handleCambio(e) {
+    const nuevoEstado = e.target.value;
+    setEstadoGuardado('guardando');
+    const ok = await onActualizar(cita.id, nuevoEstado);
+    setEstadoGuardado(ok ? 'guardado' : 'error');
+    setTimeout(() => setEstadoGuardado('idle'), 2000);
+  }
+
   return (
     <tr
       className={
@@ -51,8 +78,8 @@ function FilaCita({ cita, onActualizar, i }) {
       }
       style={{ animationDelay: `${Math.min(i * 0.04, 0.4)}s` }}
     >
-      <td className="border-b border-line px-3 py-3">{cita.fecha}</td>
-      <td className="border-b border-line px-3 py-3">{cita.hora}</td>
+      <td className="whitespace-nowrap border-b border-line px-3 py-3">{formatearFecha(cita.fecha)}</td>
+      <td className="whitespace-nowrap border-b border-line px-3 py-3">{formatearHora(cita.hora)}</td>
       <td className="border-b border-line px-3 py-3 font-medium text-paper">
         {cita.nombre_paciente}
       </td>
@@ -66,9 +93,10 @@ function FilaCita({ cita, onActualizar, i }) {
           <span className={`h-1.5 w-1.5 flex-shrink-0 rounded-full ${ESTADO_DOT[cita.estado]}`} />
           <select
             value={cita.estado}
-            onChange={(e) => onActualizar(cita.id, e.target.value)}
+            onChange={handleCambio}
+            disabled={estadoGuardado === 'guardando'}
             className={
-              'rounded border bg-bg px-2.5 py-1.5 font-sans text-[13px] text-paper transition-colors ' +
+              'rounded border bg-bg px-2.5 py-1.5 font-sans text-[13px] text-paper transition-colors disabled:opacity-60 ' +
               (cita.estado === 'confirmada'
                 ? 'border-teal text-teal-light'
                 : cita.estado === 'cancelada'
@@ -82,6 +110,22 @@ function FilaCita({ cita, onActualizar, i }) {
               </option>
             ))}
           </select>
+
+          {/* Feedback de guardado, ancho fijo para no mover el layout */}
+          <span className="w-16 flex-shrink-0 text-[11px]">
+            {estadoGuardado === 'guardando' && (
+              <span className="flex items-center gap-1 text-muted">
+                <span className="h-2.5 w-2.5 animate-spin rounded-full border-2 border-line border-t-teal-light" />
+                guardando
+              </span>
+            )}
+            {estadoGuardado === 'guardado' && (
+              <span className="animate-fade-in text-teal-light">✓ guardado</span>
+            )}
+            {estadoGuardado === 'error' && (
+              <span className="animate-fade-in text-red-300">✗ no se guardó</span>
+            )}
+          </span>
         </div>
       </td>
     </tr>

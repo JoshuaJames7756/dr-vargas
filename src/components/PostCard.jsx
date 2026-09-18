@@ -2,7 +2,8 @@ export default function PostCard({ post, onAbrir }) {
   return (
     <button
       onClick={() => onAbrir(post)}
-      className="group text-left transition-transform duration-300 ease-out hover:-translate-y-1.5"
+      aria-label={`Abrir publicación de ${post.red}: ${post.titulo}`}
+      className="group rounded text-left transition-transform duration-300 ease-out hover:-translate-y-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-light"
     >
       <div
         className="relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded border border-dashed border-paper/30 bg-bg-alt bg-cover bg-center bg-[repeating-linear-gradient(45deg,rgba(247,244,236,0.05)_0px,rgba(247,244,236,0.05)_12px,transparent_12px,transparent_24px)]"
