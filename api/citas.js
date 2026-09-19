@@ -1,5 +1,31 @@
 import { sql } from '../src/lib/db.js';
 
+const TIPOS_VALIDOS = ['ginecologia', 'control_prenatal', 'oncologia_mastologia', 'segunda_opinion', 'otro'];
+
+function validarCita(datos) {
+  const { nombre_paciente, telefono, email, tipo_consulta, fecha, hora } = datos;
+
+  if (typeof nombre_paciente !== 'string' || nombre_paciente.trim().length < 3 || nombre_paciente.length > 150) {
+    return 'El nombre debe tener entre 3 y 150 caracteres';
+  }
+  if (typeof telefono !== 'string' || !/^[\d+()\-\s]{7,20}$/.test(telefono.trim())) {
+    return 'El teléfono no tiene un formato válido';
+  }
+  if (email && (typeof email !== 'string' || email.length > 150 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
+    return 'El correo electrónico no tiene un formato válido';
+  }
+  if (!TIPOS_VALIDOS.includes(tipo_consulta)) {
+    return 'Tipo de consulta no válido';
+  }
+  if (typeof fecha !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(fecha)) {
+    return 'Fecha no válida';
+  }
+  if (typeof hora !== 'string' || !/^\d{2}:\d{2}$/.test(hora)) {
+    return 'Hora no válida';
+  }
+  return null;
+}
+
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     // Disponibilidad: horarios base menos citas ya tomadas menos bloqueos
@@ -46,10 +72,26 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Faltan campos requeridos' });
     }
 
+    const errorValidacion = validarCita(req.body);
+    if (errorValidacion) {
+      return res.status(400).json({ error: errorValidacion });
+    }
+
+    // Rate limiting simple: máximo 3 citas creadas por el mismo teléfono
+    // en los últimos 10 minutos. Evita spam sin necesitar infraestructura
+    // adicional (Redis, etc.) — usa la misma tabla citas ya existente.
+    const recientes = await sql`
+      SELECT COUNT(*) AS total FROM citas
+      WHERE telefono = ${telefono.trim()} AND creado_en > NOW() - INTERVAL '10 minutes'
+    `;
+    if (Number(recientes[0].total) >= 3) {
+      return res.status(429).json({ error: 'Demasiadas solicitudes. Intenta de nuevo en unos minutos.' });
+    }
+
     try {
       const result = await sql`
         INSERT INTO citas (nombre_paciente, telefono, email, tipo_consulta, primera_vez, fecha, hora)
-        VALUES (${nombre_paciente}, ${telefono}, ${email || null}, ${tipo_consulta}, ${primera_vez ?? true}, ${fecha}, ${hora})
+        VALUES (${nombre_paciente.trim()}, ${telefono.trim()}, ${email?.trim() || null}, ${tipo_consulta}, ${primera_vez ?? true}, ${fecha}, ${hora})
         RETURNING *
       `;
       // TODO: disparar notificación WhatsApp + email aquí (webhooks.js)
