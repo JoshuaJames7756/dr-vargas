@@ -89,9 +89,21 @@ export default async function handler(req, res) {
     }
 
     try {
+      // Busca si ya existe un paciente con este teléfono; si no, lo crea.
+      // Así toda cita nueva queda vinculada al sistema de pacientes,
+      // sin pedirle nada extra al paciente en el formulario público.
+      let [paciente] = await sql`SELECT id FROM pacientes WHERE telefono = ${telefono.trim()}`;
+      if (!paciente) {
+        [paciente] = await sql`
+          INSERT INTO pacientes (nombre, telefono, email)
+          VALUES (${nombre_paciente.trim()}, ${telefono.trim()}, ${email?.trim() || null})
+          RETURNING id
+        `;
+      }
+
       const result = await sql`
-        INSERT INTO citas (nombre_paciente, telefono, email, tipo_consulta, primera_vez, fecha, hora)
-        VALUES (${nombre_paciente.trim()}, ${telefono.trim()}, ${email?.trim() || null}, ${tipo_consulta}, ${primera_vez ?? true}, ${fecha}, ${hora})
+        INSERT INTO citas (nombre_paciente, telefono, email, tipo_consulta, primera_vez, fecha, hora, paciente_id)
+        VALUES (${nombre_paciente.trim()}, ${telefono.trim()}, ${email?.trim() || null}, ${tipo_consulta}, ${primera_vez ?? true}, ${fecha}, ${hora}, ${paciente.id})
         RETURNING *
       `;
       // TODO: disparar notificación WhatsApp + email aquí (webhooks.js)
