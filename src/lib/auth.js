@@ -11,9 +11,12 @@
 //     // ... resto del handler, ya autenticado
 //   }
 
-import { createClerkClient } from '@clerk/backend';
-
-const clerkClient = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY });
+// IMPORTANTE: verifyToken se importa como función independiente,
+// NO es un método de la instancia creada con createClerkClient().
+// Llamarlo como clerkClient.verifyToken(...) lanza un error silencioso
+// en cada petición (nunca existe ese método), que quedaba atrapado
+// por el try/catch de abajo y siempre resultaba en 401.
+import { verifyToken } from '@clerk/backend';
 
 export async function requireAuth(req, res) {
   const authHeader = req.headers.authorization || '';
@@ -25,13 +28,18 @@ export async function requireAuth(req, res) {
   }
 
   try {
-    const { sub: userId } = await clerkClient.verifyToken(token);
+    const { sub: userId } = await verifyToken(token, {
+      secretKey: process.env.CLERK_SECRET_KEY,
+    });
     if (!userId) {
       res.status(401).json({ error: 'No autorizado' });
       return null;
     }
     return { userId };
-  } catch {
+  } catch (err) {
+    // Log real del motivo, visible en los logs de Vercel — antes este
+    // detalle se perdía por completo (catch silencioso sin rastro).
+    console.error('[auth] verifyToken falló:', err.message);
     res.status(401).json({ error: 'Sesión inválida o expirada' });
     return null;
   }
